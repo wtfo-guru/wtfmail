@@ -49,7 +49,7 @@ RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repo
     && rc-update add crond default \
     && sed -i 's/\/var\/log\/mail/\/var\/log\/mail\/mail/' /etc/syslog-ng/syslog-ng.conf
 
-EXPOSE 25/tcp 143/tcp 993/tcp
+EXPOSE 25/tcp 143/tcp 587/tcp 993/tcp
 
 # Configure on startup
 COPY entrypoint.sh /usr/local/bin/

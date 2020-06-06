@@ -23,7 +23,7 @@ then
   postconf -e "virtual_alias_domains=${WTFMAIL_VIRTUAL_ALIAS_DOMAINS}"
   for VALUE in $(echo "$WTFMAIL_VIRTUAL_ALIAS_DOMAINS" | tr '[,;]' '[ ]')
   do
-    sed -i -e "/^@${VALUE} /d"
+    sed -r -i "/^@${VALUE} /d" "$VA_MAPS"
     printf "@%-25s @%s\n" "$VALUE" "$MYDOMAIN" >> "$VA_MAPS"
   done
 else
@@ -136,20 +136,21 @@ then
   unset CACERT TGT
 fi
 
+touch "$MBOX_MAPS"
 for entry in ${MYDOMAIN} ${MYHOSTNAME} localhost localhost.localdomain
 do
   # delete existing entry
-  sed -i -e "/^@${entry} /d"
+  sed -r -i "/^@${entry} /d" "$MBOX_MAPS"
   printf "@%-25s %s/%s/\n" "$entry" "$MYDOMAIN" "$BUTLER" >> "$MBOX_MAPS"
 done
 
-sed -i -e "s/^#root .*/root:		${BUTLER}@${MYDOMAIN}"
+sed -r -i "s/^#root .*/root:		${BUTLER}@${MYDOMAIN}/" /etc/postfix/aliases
 postmap "$MBOX_MAPS"
 postmap "$VA_MAPS"
 newaliases
 
 # Use 587 (submission)
-# sed -i -r -e 's/^#submission/submission/' /etc/postfix/master.cf
+# -r -i 's/^#submission/submission/' /etc/postfix/master.cf
 
 MBOX_DIR="${MBOX_DIR}/${MYDOMAIN}/${BUTLER}"
 [[ ! -d "$MBOX_DIR" ]] && mkdir -p "$MBOX_DIR"
