@@ -46,7 +46,7 @@ MBOX_MAPS=/etc/postfix/virtual_mailbox_maps
 MBOX_DIR=/var/docker/mail/domains
 MBOX_ID=1006
 
-postconf -e "${MBOX_MAPS} = hash:${MBOX_MAPS}"
+postconf -e "virtual_mailbox_maps = hash:${MBOX_MAPS}"
 postconf -e "virtual_mailbox_base = ${MBOX_DIR}"
 postconf -e "virtual_gid_maps = static:${MBOX_ID}"
 postconf -e "virtual_uid_maps = static:${MBOX_ID}"
