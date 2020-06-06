@@ -173,7 +173,7 @@ auth_mechanisms = plain login
 #auth_username_format = %Lu
 auth_verbose = yes
 disable_plaintext_auth = no
-info_log_path = /var/log/maildovecot-info.log
+info_log_path = /var/log/mail/dovecot-info.log
 log_path = /var/log/mail/dovecot.log
 mail_location = maildir:/var/docker/mail/domains/%d/%n
 passdb {

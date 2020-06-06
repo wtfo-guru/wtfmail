@@ -47,7 +47,8 @@ RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repo
     && rc-update add dovecot default \
     && rc-update add syslog-ng default \
     && rc-update add crond default \
-    && sed -i 's/\/var\/log\/mail/\/var\/log\/mail\/mail/' /etc/syslog-ng/syslog-ng.conf
+    && sed -i 's/\/var\/log\/mail/\/var\/log\/mail\/mail/' /etc/syslog-ng/syslog-ng.conf \
+    && mv /var/log/mail.log /var/log/mail/mail.log
 
 EXPOSE 25/tcp 143/tcp 587/tcp 993/tcp
 
