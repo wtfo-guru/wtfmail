@@ -180,14 +180,6 @@ passdb {
   args = $DCPWD
   driver = passwd-file
 }
-plugin {
-  autocreate = Trash
-  autocreate2 = Spam
-  autocreate3 = Sent
-  autosubscribe = Trash
-  autosubscribe2 = Spam
-  autosubscribe3 = Sent
-}
 protocols = imap
 # uncomment if you want disable imap on port 143 to enforce imaps
 #service imap-login {
