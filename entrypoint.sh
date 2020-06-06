@@ -180,14 +180,6 @@ passdb {
   args = $DCPWD
   driver = passwd-file
 }
-plugin {
-  autocreate = Trash
-  autocreate2 = Spam
-  autocreate3 = Sent
-  autosubscribe = Trash
-  autosubscribe2 = Spam
-  autosubscribe3 = Sent
-}
 protocols = imap
 # uncomment if you want disable imap on port 143 to enforce imaps
 #service imap-login {
@@ -201,8 +193,26 @@ userdb {
   args = $DCUSR
   driver = passwd-file
 }
-protocol imap {
-  mail_plugins = autocreate
+namespace inbox {
+  inbox = yes
+  separator = /
+
+  mailbox "Sent" {
+    auto = subscribe
+    special_use = \Sent
+  }
+  mailbox "Trash" {
+    auto = subscribe
+    special_use = \Trash
+  }
+  mailbox "Junk" {
+    auto = subscribe
+    special_use = \Junk
+  }
+  mailbox "Archive" {
+    auto = subscribe
+    special_use = \Archive
+  }
 }
 ENDCFG
 
