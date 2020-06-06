@@ -1,8 +1,8 @@
 #!/bin/sh
 
-MYHOSTNAME=${WTFMAIL_HOSTNAME:=mail.example.com}
-BUTLER=${WTFMAIL_USER:=butler}
-PASSWORD=${WTFMAIL_USER_PASSWORD:=butler}
+MYHOSTNAME=${WTFMAIL_HOSTNAME:-mail.example.com}
+BUTLER=${WTFMAIL_USER:-butler@example.com}
+PASSWORD=${WTFMAIL_USER_PASSWORD:-butler}
 postconf -e "myhostname=${MYHOSTNAME}"
 
 if [[ -n "$WTFMAIL_DOMAIN" ]]
