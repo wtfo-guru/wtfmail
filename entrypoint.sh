@@ -201,8 +201,26 @@ userdb {
   args = $DCUSR
   driver = passwd-file
 }
-protocol imap {
-  mail_plugins = autocreate
+namespace inbox {
+  inbox = yes
+  separator = /
+
+  mailbox "Sent" {
+    auto = subscribe
+    special_use = \Sent
+  }
+  mailbox "Trash" {
+    auto = subscribe
+    special_use = \Trash
+  }
+  mailbox "Junk" {
+    auto = subscribe
+    special_use = \Junk
+  }
+  mailbox "Archive" {
+    auto = subscribe
+    special_use = \Archive
+  }
 }
 ENDCFG
 
